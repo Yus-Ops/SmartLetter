@@ -2,16 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// 1. Route Halaman Utama (Landing Page sesuai desain)
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
+    return Inertia::render('Welcome');
 })->name('home');
 
-Route::get('dashboard', function () {
+// 2. Route Dashboard (Wajib ada agar tidak error module auth)
+Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/settings.php';
+// 3. Route Auth bawaan (Login/Register)
+// require __DIR__ . '/auth.php';
